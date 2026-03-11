@@ -1,0 +1,13 @@
+<svg width="448" height="129" viewBox="0 0 448 129" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g transform="translate(12 10) scale(0.9083333333333333)">
+  <circle cx="56" cy="44" r="14" fill="#BEA066" fill-opacity="0.9" />
+  <path d="M 14 74 C 34 74, 46 34, 64 34 C 82 34, 88 64, 108 58" stroke="#123126" stroke-width="2.75" stroke-linecap="round" fill="none" />
+  <path d="M 24 84 C 44 84, 56 50, 76 50 C 92 50, 98 70, 114 66" stroke="#123126" stroke-width="1.0" stroke-linecap="round" fill="none" stroke-opacity="0.7" />
+</g>
+<text x="137" y="31.85" text-anchor="start" dominant-baseline="hanging"
+  fill="#123126" font-family="'Cormorant Garamond', 'Times New Roman', serif" font-size="46" font-weight="400"
+  letter-spacing="2.76" style="white-space: pre;">Horizontes</text>
+<text x="137" y="80.55" text-anchor="start" dominant-baseline="hanging"
+  fill="#123126" fill-opacity="0.82" font-family="'Montserrat', 'Helvetica Neue', Arial, sans-serif" font-size="12" font-weight="600"
+  letter-spacing="3.96" text-transform="uppercase" style="white-space: pre;">CONSULTORIA</text>
+</svg>

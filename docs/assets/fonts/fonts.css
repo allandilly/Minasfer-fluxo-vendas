@@ -1,0 +1,57 @@
+/* Offline font bundle for iPhone/WhatsApp package */
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./inter-400.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  src: url("./inter-500.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  src: url("./inter-600.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./inter-700.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 800;
+  src: url("./inter-800.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 600;
+  src: url("./manrope-600.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./manrope-700.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Manrope";
+  font-style: normal;
+  font-weight: 800;
+  src: url("./manrope-800.ttf") format("truetype");
+  font-display: swap;
+}
