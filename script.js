@@ -60,7 +60,7 @@ function updateSlideState() {
 
   const title = slides[currentIndex]?.dataset?.title;
   if (title) {
-    document.title = `${title} | Novo Fluxo de Vendas Minasfer`;
+    document.title = title === "Capa" ? "Novo Fluxo de Vendas Minasfer" : `${title} | Novo Fluxo de Vendas Minasfer`;
   }
 }
 
