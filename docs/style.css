@@ -60,7 +60,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  padding: 1rem 1.15rem 0.9rem;
+  padding: 1rem 1.15rem 5rem;
 }
 
 /* -----------------------------------------------------------------
@@ -983,10 +983,16 @@ tbody tr:nth-child(even) td {
   align-items: center;
   flex-shrink: 0;
   gap: 0.7rem;
+  position: fixed;
+  left: 1rem;
+  right: 1rem;
+  bottom: max(0.6rem, env(safe-area-inset-bottom));
+  z-index: 40;
   padding: 0.58rem 0.72rem;
   border: 1px solid var(--line);
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(6px);
 }
 
 .nav-btn {
@@ -1067,7 +1073,7 @@ tbody tr:nth-child(even) td {
 
 @media (max-width: 980px) {
   .presentation-shell {
-    padding: 0.76rem;
+    padding: 0.76rem 0.76rem 4.7rem;
   }
 
   .hud {
@@ -1123,6 +1129,12 @@ tbody tr:nth-child(even) td {
 
   .hud {
     padding: 0.8rem;
+  }
+
+  .controls {
+    left: 0.72rem;
+    right: 0.72rem;
+    bottom: max(0.5rem, env(safe-area-inset-bottom));
   }
 
   .logo-slot--header {
