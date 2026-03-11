@@ -17,6 +17,7 @@ const slideCounter = document.getElementById("slideCounter");
 const progressBar = document.getElementById("progressBar");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
+const slidesContainer = document.getElementById("slides");
 
 let currentIndex = 0;
 
@@ -92,9 +93,41 @@ function handleKeyboardNavigation(event) {
   }
 }
 
+function handleTapNavigation(event) {
+  if (!slidesContainer) {
+    return;
+  }
+
+  const interactiveTarget = event.target?.closest?.("button, a, input, textarea, select, label, summary");
+  if (interactiveTarget) {
+    return;
+  }
+
+  const rect = slidesContainer.getBoundingClientRect();
+  if (!rect.width) {
+    return;
+  }
+
+  const pointerX = event.clientX;
+  if (typeof pointerX !== "number") {
+    return;
+  }
+
+  const relativeX = (pointerX - rect.left) / rect.width;
+  if (relativeX <= 0.33) {
+    goToSlide(currentIndex - 1);
+    return;
+  }
+
+  if (relativeX >= 0.67) {
+    goToSlide(currentIndex + 1);
+  }
+}
+
 prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
 nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
 document.addEventListener("keydown", handleKeyboardNavigation);
+slidesContainer?.addEventListener("click", handleTapNavigation);
 
 applyLogoToNodes("primary", BRAND_ASSETS.primary);
 applyLogoToNodes("cover", BRAND_ASSETS.cover);
