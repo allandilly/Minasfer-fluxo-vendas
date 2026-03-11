@@ -4,7 +4,7 @@
   - Este script mantém a navegação por teclado e botões.
 */
 const BRAND_ASSETS = {
-  primary: "./assets/img/logo-horizontes-horizontal.svg",
+  primary: "./assets/img/logo-horizontes-horizontal.png",
   secondary: "./assets/img/logo-horizontes-stacked.png",
   icon: "./assets/img/logo-horizontes-icon.png",
 };

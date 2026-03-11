@@ -118,6 +118,23 @@ body {
   align-self: center;
 }
 
+.logo-slot--cover-hero {
+  width: min(560px, 72%);
+  height: clamp(72px, 11vh, 118px);
+  align-self: center;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.logo-slot--cover-hero .brand-logo,
+.cover-hero-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0;
+}
+
 .logo-slot--closing {
   width: min(280px, 78%);
   height: 84px;
