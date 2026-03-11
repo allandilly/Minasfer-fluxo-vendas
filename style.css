@@ -54,6 +54,8 @@ body {
 .presentation-shell {
   position: relative;
   z-index: 1;
+  height: 100vh;
+  height: 100dvh;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -196,6 +198,7 @@ body {
 .slides {
   position: relative;
   flex: 1;
+  min-height: 0;
   overflow: hidden;
   border-radius: var(--radius-lg);
 }
@@ -978,6 +981,7 @@ tbody tr:nth-child(even) td {
 .controls {
   display: flex;
   align-items: center;
+  flex-shrink: 0;
   gap: 0.7rem;
   padding: 0.58rem 0.72rem;
   border: 1px solid var(--line);
