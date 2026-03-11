@@ -4,9 +4,9 @@
   - Este script mantém a navegação por teclado e botões.
 */
 const BRAND_ASSETS = {
-  primary: "./assets/img/logo-horizontes-horizontal.png",
-  secondary: "./assets/img/logo-horizontes-stacked.png",
-  icon: "./assets/img/logo-horizontes-icon.png",
+  primary: "./assets/img/logo-horizontes-horizontal-master.svg",
+  secondary: "./assets/img/logo-horizontes-stacked-master.svg",
+  icon: "./assets/img/logo-horizontes-icon-master.svg",
 };
 
 const slides = Array.from(document.querySelectorAll(".slide"));
