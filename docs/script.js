@@ -5,6 +5,7 @@
 */
 const BRAND_ASSETS = {
   primary: "./assets/img/logo-horizontes-horizontal-master.svg",
+  cover: "./assets/img/logo-horizontes-primary-master.svg",
   secondary: "./assets/img/logo-horizontes-stacked-master.svg",
   icon: "./assets/img/logo-horizontes-icon-master.svg",
 };
@@ -96,6 +97,7 @@ nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
 document.addEventListener("keydown", handleKeyboardNavigation);
 
 applyLogoToNodes("primary", BRAND_ASSETS.primary);
+applyLogoToNodes("cover", BRAND_ASSETS.cover);
 applyLogoToNodes("secondary", BRAND_ASSETS.secondary);
 applyLogoToNodes("icon", BRAND_ASSETS.icon);
 updateSlideState();

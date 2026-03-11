@@ -200,6 +200,23 @@ body {
   border-radius: var(--radius-lg);
 }
 
+.slides-watermark {
+  position: absolute;
+  right: 1.1rem;
+  bottom: 1rem;
+  width: clamp(44px, 5.4vw, 76px);
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.16;
+}
+
+.slides-watermark-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
 .slide {
   position: absolute;
   inset: 0;
@@ -1093,6 +1110,13 @@ tbody tr:nth-child(even) td {
 }
 
 @media (max-width: 760px) {
+  .slides-watermark {
+    width: 46px;
+    right: 0.75rem;
+    bottom: 0.8rem;
+    opacity: 0.14;
+  }
+
   .hud {
     padding: 0.8rem;
   }
