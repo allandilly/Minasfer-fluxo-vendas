@@ -1,0 +1,1869 @@
+<!doctype html>
+<!--
+Instruções rápidas:
+1) Abra o arquivo index.html no navegador.
+2) Use as setas do teclado (esquerda/direita) ou os botões de navegação para avançar e voltar.
+3) Troque as logos na pasta /assets/img.
+4) Edite os textos diretamente nas seções dos slides neste arquivo.
+5) Edite cores e tipografia no arquivo style.css.
+-->
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novo Fluxo de Vendas Minasfer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+/*
+  -----------------------------------------------------------------
+  Estilo da apresentação Minasfer (versão consultiva clara)
+  - Paleta principal definida em :root para facilitar ajustes rápidos
+  - Tipografia: Inter (texto) + Manrope (títulos)
+  -----------------------------------------------------------------
+*/
+:root {
+  --bg: #f6f3ea;
+  --bg-alt: #f5f1e8;
+  --text: #2e2a25;
+  --text-soft: #5c564d;
+  --olive: #6f7b52;
+  --olive-dark: #55613d;
+  --olive-soft: #dde3d0;
+  --sand: #eae3d3;
+  --alert: #a64b43;
+  --line: #d8d1c4;
+  --card: #fffdf8;
+  --white: #ffffff;
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --shadow: 0 8px 26px rgba(72, 63, 48, 0.1);
+  --shadow-strong: 0 14px 36px rgba(72, 63, 48, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Inter", "Manrope", "Segoe UI", sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-alt) 100%);
+  overflow: hidden;
+}
+
+.paper-texture {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: radial-gradient(rgba(111, 123, 82, 0.05) 1px, transparent 1px);
+  background-size: 14px 14px;
+  opacity: 0.38;
+}
+
+.presentation-shell {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  padding: 1rem 1.15rem 0.9rem;
+}
+
+/* -----------------------------------------------------------------
+   Cabecalho institucional (uma logo + texto)
+----------------------------------------------------------------- */
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.brand-header {
+  display: grid;
+  grid-template-columns: auto minmax(300px, 1fr);
+  align-items: center;
+  gap: 0.85rem;
+  width: min(740px, 100%);
+}
+
+.logo-slot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px dashed #d2c9b8;
+  background: #fffdfa;
+}
+
+.logo-slot--header {
+  height: auto;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+  justify-content: flex-start;
+}
+
+.logo-slot--header .brand-logo {
+  width: auto;
+  height: clamp(36px, 4.6vw, 50px);
+  max-width: 240px;
+  object-fit: contain;
+  padding: 0;
+}
+
+.logo-slot--cover-secondary {
+  width: min(360px, 86%);
+  height: 84px;
+  align-self: center;
+}
+
+.logo-slot--closing {
+  width: min(280px, 78%);
+  height: 84px;
+}
+
+.brand-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0.36rem;
+}
+
+.logo-placeholder {
+  position: absolute;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0.4rem;
+  background: rgba(246, 243, 234, 0.92);
+  color: var(--text-soft);
+  font-size: 0.76rem;
+  font-weight: 600;
+}
+
+.logo-slot.logo-missing .logo-placeholder {
+  display: flex;
+}
+
+.brand-header-copy {
+  display: grid;
+  gap: 0.2rem;
+}
+
+.brand-header-copy strong {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.05rem, 1.8vw, 1.5rem);
+  line-height: 1.18;
+  color: var(--olive-dark);
+}
+
+.brand-header-copy span {
+  color: var(--text-soft);
+  font-size: clamp(0.78rem, 1.1vw, 0.94rem);
+}
+
+.slide-counter {
+  min-width: 5.2rem;
+  text-align: right;
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--olive-dark);
+}
+
+/* -----------------------------------------------------------------
+   Estrutura de slides e transições
+----------------------------------------------------------------- */
+.slides {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translateX(4%) scale(0.99);
+  pointer-events: none;
+  transition: opacity 360ms ease, transform 430ms cubic-bezier(0.22, 0.7, 0.24, 1);
+}
+
+.slide.prev {
+  transform: translateX(-4%) scale(0.99);
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateX(0) scale(1);
+  pointer-events: auto;
+}
+
+.slide-frame {
+  height: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line);
+  background: linear-gradient(170deg, #fffcf5 0%, #f8f4eb 100%);
+  box-shadow: var(--shadow-strong);
+  padding: clamp(1rem, 2.1vw, 1.85rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  overflow: auto;
+}
+
+.cover-frame {
+  justify-content: center;
+}
+
+.closing-frame {
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+/* Animação discreta de entrada por bloco */
+.slide-frame > * {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.slide.active .slide-frame > * {
+  animation: fadeRise 500ms ease forwards;
+}
+
+.slide.active .slide-frame > *:nth-child(2) {
+  animation-delay: 55ms;
+}
+.slide.active .slide-frame > *:nth-child(3) {
+  animation-delay: 95ms;
+}
+.slide.active .slide-frame > *:nth-child(4) {
+  animation-delay: 140ms;
+}
+.slide.active .slide-frame > *:nth-child(5) {
+  animation-delay: 185ms;
+}
+
+@keyframes fadeRise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* -----------------------------------------------------------------
+   Tipografia e textos
+----------------------------------------------------------------- */
+h1,
+h2,
+h3,
+strong,
+blockquote {
+  font-family: "Manrope", "Inter", sans-serif;
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2rem, 4.7vw, 3.3rem);
+  line-height: 1.07;
+  color: var(--olive-dark);
+}
+
+h2 {
+  margin: 0;
+  font-size: clamp(1.42rem, 3.05vw, 2.25rem);
+  line-height: 1.14;
+  color: #403a31;
+}
+
+h3 {
+  margin: 0;
+  font-size: clamp(1rem, 1.72vw, 1.2rem);
+  line-height: 1.2;
+  color: #3e382f;
+}
+
+p,
+li,
+span,
+td,
+th {
+  font-size: clamp(0.92rem, 1.26vw, 1.02rem);
+  line-height: 1.45;
+}
+
+p {
+  margin: 0;
+  color: var(--text-soft);
+}
+
+.slide-kicker {
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--olive-dark);
+  font-size: 0.74rem;
+  font-weight: 700;
+}
+
+.slide-context {
+  color: var(--text-soft);
+  max-width: 94ch;
+}
+
+.slide-close {
+  margin-top: auto;
+  color: #474036;
+  font-weight: 600;
+  border-left: 3px solid #b2bc9f;
+  padding-left: 0.7rem;
+}
+
+blockquote {
+  margin: 0;
+  max-width: 930px;
+  color: #3f3a32;
+  font-size: clamp(1.4rem, 2.7vw, 2.2rem);
+  line-height: 1.3;
+}
+
+/* -----------------------------------------------------------------
+   Blocos, cards e grades
+----------------------------------------------------------------- */
+.grid-2,
+.grid-3 {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(3, minmax(200px, 1fr));
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+.compact-grid article {
+  min-height: 102px;
+}
+
+.note-card,
+.pain-card,
+.gain-card,
+.rule-card,
+.flow-step,
+.cascade-card,
+.compare-column,
+.result-card {
+  border-radius: var(--radius-md);
+  border: 1px solid var(--line);
+  padding: 0.8rem 0.9rem;
+  background: var(--card);
+  box-shadow: var(--shadow);
+  display: grid;
+  gap: 0.35rem;
+}
+
+.note-card--sand {
+  background: #f4ede0;
+  border-color: #e1d7c5;
+}
+
+.note-card--olive {
+  background: #ebf1df;
+  border-color: #c8d3b2;
+}
+
+.note-card--olive-soft {
+  background: var(--olive-soft);
+  border-color: #c4cfaf;
+}
+
+.note-card h3,
+.note-card p {
+  color: #3f392f;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 0.66rem;
+}
+
+.sectors-grid .result-card {
+  min-height: 104px;
+}
+
+.result-card {
+  background: #e9f0dd;
+  border-color: #c3cfae;
+  gap: 0.3rem;
+  min-height: 118px;
+}
+
+.result-card h3 {
+  color: #49583a;
+  font-size: 1rem;
+}
+
+.result-card p {
+  color: #4f5b40;
+  font-size: 0.9rem;
+}
+
+.channels-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+  gap: 0.62rem;
+}
+
+.pain-card {
+  background: #fbefed;
+  border-color: #e7c1bc;
+}
+
+.pain-card h3 {
+  color: #7c2f29;
+}
+
+.pain-card h3::before {
+  content: "!";
+  display: inline-grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-right: 0.42rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  color: #fff;
+  background: var(--alert);
+}
+
+.pain-card p {
+  color: #72413b;
+}
+
+.gain-card {
+  background: #eef4e5;
+  border-color: #c9d5b2;
+}
+
+.gain-card h3 {
+  color: #4d5a37;
+}
+
+.gain-card h3::before {
+  content: "+";
+  display: inline-grid;
+  place-items: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-right: 0.42rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  color: #fff;
+  background: var(--olive);
+}
+
+.gain-card p {
+  color: #4e5c3c;
+}
+
+/* Linha de etapas do slide 2 */
+.process-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.process-line span {
+  padding: 0.42rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid #cfd8bf;
+  background: #eef4e5;
+  color: #4f5c3a;
+  font-weight: 600;
+}
+
+/* Causa e efeito */
+.cascade-grid {
+  display: grid;
+  gap: 0.72rem;
+}
+
+.cascade-card {
+  background: #f8f2e5;
+  border-color: #e3d5b8;
+}
+
+.cascade-card h3 {
+  color: #6f572d;
+}
+
+.cascade-card--critical {
+  background: #fbeeed;
+  border-color: #e7c0bc;
+}
+
+.cascade-card--critical h3 {
+  color: #843731;
+}
+
+/* Regras de negociação */
+.rule-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+.rule-card {
+  background: #faf6ed;
+  border-color: #dfd2bc;
+}
+
+.rule-card--highlight {
+  background: #f8ecea;
+  border-color: #e5beba;
+}
+
+.rule-number {
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(2.3rem, 4.5vw, 3.6rem);
+  color: #8f3932;
+  line-height: 1;
+}
+
+.strategic-note {
+  border-radius: var(--radius-md);
+  border: 1px solid #d4c6ae;
+  background: #f6efdf;
+  box-shadow: var(--shadow);
+  padding: 0.84rem 0.95rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.strategic-note h3 {
+  color: #6c5532;
+}
+
+.strategic-note p {
+  color: #5c4f40;
+}
+
+.ruler-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(160px, 1fr));
+  gap: 0.62rem;
+}
+
+.ruler-card {
+  border-radius: 13px;
+  border: 1px solid #d8d1c4;
+  background: #fffdf7;
+  box-shadow: var(--shadow);
+  padding: 0.75rem 0.8rem;
+  display: grid;
+  gap: 0.26rem;
+}
+
+.ruler-card h3 {
+  color: #4d5a37;
+  font-size: 0.98rem;
+}
+
+.ruler-card p {
+  color: #61594d;
+  font-weight: 600;
+}
+
+.ruler-card--ok {
+  border-color: #bdd0a2;
+  background: #edf3e4;
+}
+
+.ruler-card--warn {
+  border-color: #e3cf9e;
+  background: #fbf4e3;
+}
+
+.ruler-card--critical {
+  border-color: #dfb6b1;
+  background: #fbeeee;
+}
+
+/* Tabela de responsabilidades */
+.table-wrap {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  overflow: auto;
+  background: var(--white);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+thead th {
+  background: #e9e2d1;
+  color: #4d463c;
+  font-size: 0.86rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.7rem;
+  text-align: left;
+}
+
+tbody td {
+  padding: 0.65rem 0.7rem;
+  border-top: 1px solid #ece5d8;
+  color: #514b41;
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) td {
+  background: #fcfaf4;
+}
+
+/* Fluxo ponta a ponta */
+.macro-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(260px, 0.95fr);
+  gap: 0.8rem;
+}
+
+.macro-main {
+  display: grid;
+  gap: 0.7rem;
+}
+
+.macro-flow-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.58rem;
+}
+
+.macro-step {
+  position: relative;
+  border-radius: 14px;
+  border: 1px solid #d8d1c4;
+  background: #fffdf7;
+  box-shadow: var(--shadow);
+  padding: 0.7rem 0.64rem;
+  display: grid;
+  gap: 0.3rem;
+  min-height: 162px;
+  flex: 1 1 0;
+  min-width: 128px;
+}
+
+.macro-step h3 {
+  font-size: 0.94rem;
+  line-height: 1.2;
+  color: #4f5a3a;
+}
+
+.macro-step p {
+  font-size: 0.84rem;
+  color: #5f584d;
+}
+
+.macro-key {
+  margin-top: auto;
+  border-radius: 10px;
+  border: 1px solid #b8c6a0;
+  background: #edf3e4;
+  color: #43502f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.35;
+  padding: 0.35rem 0.45rem;
+}
+
+.macro-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -0.36rem;
+  top: 50%;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-top: 2px solid #94a283;
+  border-right: 2px solid #94a283;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.macro-step--focus {
+  border-color: #c5d0af;
+  background: #edf3e4;
+  box-shadow: 0 10px 20px rgba(111, 123, 82, 0.16);
+}
+
+.macro-step--wide {
+  flex-grow: 1.35;
+}
+
+.macro-step--final {
+  border: 2px solid #7f9560;
+  background: #dfe8cf;
+  box-shadow: 0 12px 24px rgba(86, 97, 61, 0.24);
+  flex-grow: 1.2;
+}
+
+.macro-key--final {
+  border-color: #7f9560;
+  background: #cedcb6;
+  color: #334227;
+}
+
+.macro-aside {
+  border-radius: var(--radius-md);
+  border: 1px solid #d8d1c4;
+  background: #fcf8ef;
+  box-shadow: var(--shadow);
+  padding: 0.62rem 0.68rem;
+  display: grid;
+  gap: 0.28rem;
+  align-content: start;
+  max-width: 280px;
+  justify-self: end;
+}
+
+.macro-aside h3 {
+  color: #6e5834;
+  font-size: 0.93rem;
+}
+
+.macro-aside p {
+  color: #5f5547;
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.pv-map {
+  display: grid;
+  grid-template-columns: minmax(0, 2.05fr) minmax(180px, 0.58fr);
+  gap: 0.75rem;
+}
+
+.pv-main {
+  display: grid;
+  gap: 0.52rem;
+}
+
+.pv-track {
+  display: flex;
+  align-items: stretch;
+  gap: 0.62rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.pv-node {
+  flex: 1 1 0;
+  min-width: 164px;
+  min-height: 168px;
+  position: relative;
+  border-radius: 13px;
+  border: 1px solid #d8d1c4;
+  background: #fffdf7;
+  box-shadow: var(--shadow);
+  padding: 0.66rem 0.6rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.pv-node h3 {
+  font-size: 0.92rem;
+  color: #4d5a37;
+  line-height: 1.2;
+}
+
+.pv-node p {
+  font-size: 0.84rem;
+  color: #5f584d;
+  line-height: 1.33;
+}
+
+.pv-node:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -0.34rem;
+  top: 50%;
+  width: 0.38rem;
+  height: 0.38rem;
+  border-top: 2px solid #95a383;
+  border-right: 2px solid #95a383;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.pv-node--focus {
+  border-color: #bdd0a2;
+  background: #edf3e4;
+  box-shadow: 0 10px 22px rgba(111, 123, 82, 0.16);
+}
+
+.pv-node--approval {
+  min-width: 150px;
+  background: #faf7ef;
+  border-color: #d9ceb9;
+}
+
+.pv-node--wide {
+  flex-grow: 1.4;
+  min-width: 220px;
+}
+
+.pv-node--final {
+  border: 2px solid #809761;
+  background: #dfe8cf;
+  box-shadow: 0 10px 24px rgba(86, 97, 61, 0.24);
+  min-width: 190px;
+}
+
+.pv-emphasis {
+  margin-top: auto;
+  border-radius: 10px;
+  border: 1px solid #b8c6a0;
+  background: #edf3e4;
+  color: #43502f;
+  font-size: 0.78rem;
+  font-weight: 700;
+  line-height: 1.3;
+  padding: 0.32rem 0.44rem;
+}
+
+.pv-emphasis--final {
+  border-color: #809761;
+  background: #d0ddb9;
+  color: #334227;
+}
+
+.pv-subnote {
+  font-size: 0.75rem;
+  color: #6a6153;
+}
+
+.pv-oc-note {
+  border-radius: 12px;
+  border: 1px solid #d9ceb9;
+  background: #faf5ea;
+  padding: 0.52rem 0.66rem;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.pv-oc-note strong {
+  font-size: 0.8rem;
+  color: #5b4b33;
+}
+
+.pv-oc-note span {
+  font-size: 0.78rem;
+  color: #625648;
+}
+
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(170px, 1fr));
+  gap: 0.65rem;
+}
+
+.flow-grid--ten {
+  grid-template-columns: repeat(5, minmax(160px, 1fr));
+}
+
+.flow-step {
+  position: relative;
+  min-height: 95px;
+  background: #f7f4ec;
+}
+
+.flow-step h3 {
+  color: #4f5b3b;
+  font-size: 0.98rem;
+}
+
+.flow-step p {
+  color: #5f584e;
+  font-size: 0.88rem;
+}
+
+.flow-step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -0.44rem;
+  top: 50%;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-top: 2px solid #9ca989;
+  border-right: 2px solid #9ca989;
+  transform: translateY(-50%) rotate(45deg);
+}
+
+/* Comparativo antes x depois */
+.compare-layout {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(280px, 1fr));
+  gap: 0.8rem;
+}
+
+.compare-column {
+  min-height: 260px;
+}
+
+.compare-column--before {
+  background: #f1e8d8;
+  border-color: #dccfb8;
+}
+
+.compare-column--after {
+  background: #e4ead7;
+  border-color: #c5d0af;
+}
+
+.compare-column p {
+  color: #4e483d;
+}
+
+/* -----------------------------------------------------------------
+   Rodapé de navegação
+----------------------------------------------------------------- */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.58rem 0.72rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.nav-btn {
+  border: 1px solid #c7d1b3;
+  background: #eef4e5;
+  color: #495539;
+  border-radius: 10px;
+  padding: 0.52rem 0.85rem;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 150ms ease, filter 150ms ease;
+}
+
+.nav-btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.nav-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.progress-wrap {
+  flex: 1;
+  height: 9px;
+  border: 1px solid #d9d1c2;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #f0ebdf;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 6%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--olive), #8c9870);
+  transition: width 290ms ease;
+}
+
+/* -----------------------------------------------------------------
+   Responsividade para notebook e desktop
+----------------------------------------------------------------- */
+@media (max-width: 1220px) {
+  .brand-header {
+    grid-template-columns: 1fr;
+    gap: 0.55rem;
+  }
+
+  .grid-3,
+  .flow-grid,
+  .flow-grid--ten,
+  .results-grid,
+  .channels-row,
+  .ruler-grid {
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+  }
+
+  .macro-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .pv-map {
+    grid-template-columns: 1fr;
+  }
+
+  .macro-flow-row {
+    flex-wrap: wrap;
+  }
+
+  .macro-step {
+    min-width: 190px;
+  }
+}
+
+@media (max-width: 980px) {
+  .presentation-shell {
+    padding: 0.76rem;
+  }
+
+  .hud {
+    flex-wrap: wrap;
+  }
+
+  .slide-counter {
+    width: 100%;
+    text-align: left;
+  }
+
+  .grid-2,
+  .grid-3,
+  .payment-grid,
+  .rule-layout,
+  .compare-layout,
+  .flow-grid,
+  .flow-grid--ten,
+  .results-grid,
+  .channels-row,
+  .ruler-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .macro-step::after {
+    display: none;
+  }
+
+  .pv-track {
+    flex-wrap: wrap;
+  }
+
+  .pv-node {
+    min-width: 180px;
+  }
+
+  .pv-node::after {
+    display: none;
+  }
+
+  .flow-step::after {
+    display: none;
+  }
+}
+
+@media (max-width: 760px) {
+  .hud {
+    padding: 0.8rem;
+  }
+
+  .logo-slot--header {
+    height: auto;
+  }
+
+  .logo-slot--header .brand-logo {
+    height: 40px;
+    max-width: 210px;
+  }
+
+  .slide-frame {
+    padding: 0.95rem;
+  }
+}
+    </style>
+  </head>
+  <body>
+    <div class="paper-texture" aria-hidden="true"></div>
+
+    <div class="presentation-shell">
+      <header class="hud">
+        <div class="brand-header">
+          <div class="logo-slot logo-slot--header">
+            <img data-logo="primary" class="brand-logo" alt="Horizontes logo principal" />
+            <div class="logo-placeholder">Inserir logo principal</div>
+          </div>
+          <div class="brand-header-copy">
+            <strong>Fluxo Operacional de Vendas Minasfer</strong>
+            <span>Padronização comercial, regras financeiras e rastreabilidade operacional</span>
+          </div>
+        </div>
+
+        <span id="slideCounter" class="slide-counter">1 / 17</span>
+      </header>
+
+      <main id="slides" class="slides" aria-live="polite">
+        <!-- Slide 1 -->
+        <section class="slide active" data-title="Capa">
+          <div class="slide-frame cover-frame">
+            <p class="slide-kicker">MINASFER | EVOLUÇÃO DO PROCESSO COMERCIAL</p>
+            <h1>Novo Fluxo de Vendas Minasfer</h1>
+            <p class="slide-context">
+              Uma proposta de organização operacional para fortalecer o que já funciona bem, reduzir ruídos e ampliar
+              previsibilidade, controle e capacidade de crescimento.
+            </p>
+
+            <div class="grid-2">
+              <article class="note-card note-card--sand">
+                <h3>Base já construída</h3>
+                <p>
+                  A Minasfer já possui operação ativa, relacionamento comercial consolidado e experiência prática no atendimento,
+                  na negociação, na entrega e na condução do dia a dia do negócio.
+                </p>
+              </article>
+              <article class="note-card note-card--olive">
+                <h3>Oportunidade de evolução</h3>
+                <p>
+                  Esta proposta organiza o processo de ponta a ponta para dar mais clareza entre setores, reforçar critérios de
+                  decisão, melhorar rastreabilidade e sustentar o crescimento com mais segurança.
+                </p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- Slide 2 -->
+        <section class="slide" data-title="Escopo do procedimento">
+          <div class="slide-frame">
+            <p class="slide-kicker">Escopo oficial</p>
+            <h2>Setores envolvidos no procedimento</h2>
+            <p class="slide-context">
+              O novo fluxo integra setores com responsabilidades complementares. A venda só funciona com passagem correta entre
+              essas áreas.
+            </p>
+
+            <div class="results-grid sectors-grid">
+              <article class="result-card"><h3>Comercial</h3><p>Atende, negocia e cria o PV em orçamento no ERP.</p></article>
+              <article class="result-card"><h3>Caixa</h3><p>Confirma condição, gera financeiro e define natureza do pedido.</p></article>
+              <article class="result-card"><h3>Faturamento</h3><p>Emite NF-e, boleto/título e libera documentação de saída.</p></article>
+              <article class="result-card"><h3>Produção / Corte e Dobra</h3><p>Executa apenas pedidos que exigem produção.</p></article>
+              <article class="result-card"><h3>Separação / Galpão / Estoque</h3><p>Separa, registra retirada parcial/total e apoia conferência física.</p></article>
+              <article class="result-card"><h3>Logística</h3><p>Planeja rota/carga, confere documentação e conclui entrega.</p></article>
+              <article class="result-card"><h3>Administrativo / Crédito</h3><p>Analisa crédito, documentação e liberações de boleto.</p></article>
+              <article class="result-card"><h3>Gestão / Aprovação Comercial</h3><p>Aprova negociações fora da régua e sustenta disciplina do processo.</p></article>
+            </div>
+
+            <p class="slide-close">O procedimento é intersetorial: cada etapa depende da anterior estar correta.</p>
+          </div>
+        </section>
+
+        <!-- Slide 3 -->
+        <section class="slide" data-title="Canais de entrada do cliente">
+          <div class="slide-frame">
+            <p class="slide-kicker">Origem da venda</p>
+            <h2>Canais de entrada do cliente</h2>
+            <p class="slide-context">
+              Toda venda pode começar por diferentes canais, mas a origem precisa ser registrada corretamente no PV para garantir
+              rastreabilidade operacional.
+            </p>
+
+            <div class="channels-row">
+              <article class="flow-step"><h3>Balcão</h3><p>Atendimento presencial com conversão rápida para PV.</p></article>
+              <article class="flow-step"><h3>Telefone</h3><p>Negociação remota com formalização no ERP.</p></article>
+              <article class="flow-step"><h3>WhatsApp</h3><p>Canal de demanda comercial que precisa virar PV formal.</p></article>
+              <article class="flow-step"><h3>Ordem de Compra (O.C.)</h3><p>Entrada com exigência de informação obrigatória no processo.</p></article>
+            </div>
+
+            <p class="slide-close">Sem origem correta no PV, o fluxo perde clareza entre comercial, caixa e faturamento.</p>
+          </div>
+        </section>
+
+        <!-- Slide 4 -->
+        <section class="slide" data-title="Condições de negociação 2026/1">
+          <div class="slide-frame">
+            <p class="slide-kicker">Régua comercial oficial</p>
+            <h2>Condições de negociação 2026/1</h2>
+            <p class="slide-context">
+              A negociação continua possível, mas dentro de regras objetivas para proteger margem, reduzir exceções e melhorar
+              previsibilidade do recebimento.
+            </p>
+
+            <div class="results-grid">
+              <article class="result-card">
+                <h3>Dinheiro, Pix ou débito</h3>
+                <p>Desconto de até 8%. Em vendas acima de R$ 10.000,00, desconto pode chegar até 11,5%.</p>
+              </article>
+              <article class="result-card">
+                <h3>Cartão de crédito</h3>
+                <p>
+                  Acima de R$ 300,00 até 2x. Acima de R$ 500,00 até 3x. De 4x a 8x somente com parcela na faixa de R$ 500,00,
+                  na prática exigindo vendas acima de R$ 2.000,00.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Boleto</h3>
+                <p>
+                  Permitido somente para compras acima de R$ 1.000,00, clientes cadastrados e com crédito liberado. Prazos: 30,
+                  60 ou 90 dias.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Clientes novos</h3>
+                <p>Não possuem liberação automática para boleto. Dependem de análise de crédito, documentação e aprovação.</p>
+              </article>
+              <article class="result-card">
+                <h3>Mensalista e crediário</h3>
+                <p>Não disponibilizar para novos clientes. Clientes antigos permanecem temporariamente nos formatos atuais.</p>
+              </article>
+              <article class="result-card">
+                <h3>Aprovação comercial</h3>
+                <p>Exceções e negociações fora da régua podem exigir aprovação de Bryan, Janderson e Luiz.</p>
+              </article>
+              <article class="result-card">
+                <h3>Orçamento concorrente como justificativa de negociação</h3>
+                <p>
+                  Quando o cliente apresentar orçamento de outra empresa para solicitar cobertura de preço ou forçar negociação, o
+                  documento deve ser enviado ao grupo de WhatsApp da loja. Além disso, o número do orçamento e o nome da empresa
+                  concorrente devem constar no PV, no campo de observações, para justificar o desconto, permitir rastreabilidade
+                  da negociação e formar base futura de análise de margens.
+                </p>
+              </article>
+            </div>
+
+            <p class="slide-close">A régua comercial organiza a negociação e protege melhor margem e previsibilidade.</p>
+          </div>
+        </section>
+
+        <!-- Slide 5 -->
+        <section class="slide" data-title="Como nasce o PV no ERP">
+          <div class="slide-frame">
+            <p class="slide-kicker">Origem formal do processo</p>
+            <h2>Como nasce o Pedido de Venda (PV) no ERP</h2>
+            <p class="slide-context">
+              O PV é criado pelo vendedor em status Orçamento e precisa nascer completo para permitir execução correta nas etapas
+              seguintes.
+            </p>
+
+            <div class="grid-2">
+              <article class="note-card note-card--olive-soft">
+                <h3>Campos obrigatórios no PV</h3>
+                <ul>
+                  <li>Cliente</li>
+                  <li>Itens</li>
+                  <li>Preços</li>
+                  <li>Desconto</li>
+                  <li>Condição de pagamento</li>
+                  <li>Origem do pedido</li>
+                  <li>Número da O.C. quando houver</li>
+                  <li>Observações relevantes</li>
+                </ul>
+              </article>
+              <article class="note-card note-card--sand">
+                <h3>Regra de continuidade</h3>
+                <p>
+                  O orçamento pode permanecer aberto por até 7 dias. Sem aprovação, o vendedor registra motivo e arquiva. Com
+                  aprovação, o PV segue para o Caixa.
+                </p>
+              </article>
+            </div>
+
+            <p class="slide-close">Quando o PV nasce completo na origem, o fluxo ganha fluidez entre caixa, faturamento e financeiro.</p>
+          </div>
+        </section>
+
+        <!-- Slide 6 -->
+        <section class="slide" data-title="Régua do orçamento e prazo">
+          <div class="slide-frame">
+            <p class="slide-kicker">Controle de vencimento do orçamento</p>
+            <h2>Régua do orçamento e controle de prazo</h2>
+            <p class="slide-context">
+              O prazo de 7 dias organiza prioridade de negociação e evita orçamento aberto sem tratativa até perder validade.
+            </p>
+
+            <div class="ruler-grid">
+              <article class="ruler-card ruler-card--ok"><h3>Dias 1 a 4</h3><p>Normal</p></article>
+              <article class="ruler-card ruler-card--warn"><h3>Dias 5 e 6</h3><p>Amarelo</p></article>
+              <article class="ruler-card ruler-card--critical"><h3>Dia 7</h3><p>Vermelho</p></article>
+              <article class="ruler-card"><h3>Após o dia 7</h3><p>Expirado / Arquivado</p></article>
+            </div>
+
+            <div class="strategic-note">
+              <h3>Regra de decisão</h3>
+              <p>
+                Sem aprovação: vendedor registra motivo de não conversão e arquiva. Com aprovação: pedido avança para o caixa com condição
+                definida.
+              </p>
+            </div>
+
+            <p class="slide-close">Prazo controlado reduz carteira de orçamentos improdutivos e melhora foco comercial.</p>
+          </div>
+        </section>
+
+        <!-- Slide 7 -->
+        <section class="slide" data-title="Responsabilidades do Comercial">
+          <div class="slide-frame">
+            <p class="slide-kicker">Papel do setor Comercial</p>
+            <h2>Responsabilidades do Comercial</h2>
+            <p class="slide-context">
+              O Comercial é responsável por abrir corretamente o processo. Essa etapa define a qualidade de tudo que vem depois.
+            </p>
+
+            <div class="results-grid">
+              <article class="result-card"><h3>Atender e negociar dentro da regra</h3><p>Aplicar condições disponíveis no ERP e solicitar aprovação quando necessário.</p></article>
+              <article class="result-card"><h3>Criar PV em orçamento</h3><p>Registrar pedido completo com origem, condição, desconto e observações.</p></article>
+              <article class="result-card"><h3>Registrar O.C. quando houver</h3><p>Garantir que a informação siga para caixa e faturamento com continuidade.</p></article>
+              <article class="result-card">
+                <h3>Registrar orçamento concorrente quando houver</h3>
+                <p>
+                  Sempre que a negociação estiver baseada em orçamento de outra empresa, o Comercial deve encaminhar o documento
+                  para o grupo de WhatsApp da loja e registrar no PV, nas observações, o número do orçamento e o nome da empresa
+                  concorrente.
+                </p>
+              </article>
+              <article class="result-card"><h3>Acompanhar prazo do orçamento</h3><p>Controlar a régua dos 7 dias e tratar o avanço antes da expiração.</p></article>
+              <article class="result-card"><h3>Solicitar aprovação comercial</h3><p>Acionar Bryan, Janderson e Luiz em negociações fora da régua.</p></article>
+              <article class="result-card"><h3>Registrar motivo de não conversão</h3><p>Sem aprovação ou conversão, arquivar com motivo formal no processo.</p></article>
+            </div>
+
+            <p class="slide-close">A qualidade do PV começa no Comercial e determina a eficiência do fluxo inteiro.</p>
+          </div>
+        </section>
+
+        <!-- Slide 8 -->
+        <section class="slide" data-title="Papel do Caixa">
+          <div class="slide-frame">
+            <p class="slide-kicker">Validação e operacionalização</p>
+            <h2>Papel do Caixa no fluxo oficial</h2>
+            <p class="slide-context">
+              O Caixa não renegocia com o cliente. Ele confirma o que foi definido no PV e operacionaliza corretamente a próxima
+              etapa do processo.
+            </p>
+
+            <div class="grid-2">
+              <article class="note-card note-card--olive-soft">
+                <h3>Responsabilidades do Caixa</h3>
+                <ul>
+                  <li>Confirmar PV aprovado</li>
+                  <li>Selecionar forma de recebimento correta</li>
+                  <li>Gerar o financeiro no ERP</li>
+                  <li>Concluir balcão imediato quando aplicável</li>
+                  <li>Identificar natureza do pedido</li>
+                  <li>Disparar a próxima etapa com clareza</li>
+                </ul>
+              </article>
+              <article class="note-card note-card--sand">
+                <h3>Regra de conferência</h3>
+                <p>
+                  Entrada no caixa deve refletir exatamente a condição definida no PV. Inconsistência nessa etapa aumenta ajustes
+                  em faturamento, cobrança e conciliação.
+                </p>
+              </article>
+            </div>
+
+            <p class="slide-close">Caixa correto transforma negociação aprovada em operação executável e rastreável.</p>
+          </div>
+        </section>
+
+        <!-- Slide 9 -->
+        <section class="slide" data-title="Tipos financeiros e natureza do pedido">
+          <div class="slide-frame">
+            <p class="slide-kicker">Classificação financeira no Caixa</p>
+            <h2>Tipos financeiros e natureza do pedido</h2>
+            <p class="slide-context">
+              Ao receber um PV aprovado, o Caixa classifica a natureza do pedido para encaminhar corretamente o fluxo entre
+              setores.
+            </p>
+
+            <div class="grid-3">
+              <article class="note-card"><h3>Caixa imediato</h3><p>Fluxo de balcão com conclusão rápida e emissão adequada de documento fiscal.</p></article>
+              <article class="note-card"><h3>Faturado boleto</h3><p>Pedido segue para faturamento e título, respeitando regra de crédito e prazo.</p></article>
+              <article class="note-card"><h3>Cliente legado mensalista</h3><p>Mantido temporariamente no formato atual, com disciplina de fechamento.</p></article>
+              <article class="note-card"><h3>Cliente legado crediário</h3><p>Mantido temporariamente no formato atual, com acompanhamento financeiro.</p></article>
+              <article class="note-card"><h3>Pedido com O.C.</h3><p>Informação obrigatória deve seguir no fluxo até constar na NF.</p></article>
+              <article class="note-card note-card--olive-soft"><h3>Regra comum</h3><p>Toda natureza confirmada no caixa gera financeiro no ERP e define próximo passo.</p></article>
+            </div>
+
+            <p class="slide-close">Classificação correta no caixa fortalece a integração entre faturamento, logística e financeiro.</p>
+          </div>
+        </section>
+
+        <!-- Slide 10 -->
+        <section class="slide" data-title="Regras fiscais">
+          <div class="slide-frame">
+            <p class="slide-kicker">Conformidade fiscal da operação</p>
+            <h2>Regras fiscais do processo</h2>
+            <p class="slide-context">
+              A regra fiscal precisa estar explícita no fluxo para reduzir risco de atraso de emissão, inconsistência documental e
+              restrição de entrega.
+            </p>
+
+            <div class="grid-3">
+              <article class="note-card note-card--olive-soft"><h3>NFC-e</h3><p>Usar para balcão imediato.</p></article>
+              <article class="note-card note-card--olive-soft"><h3>NF-e</h3><p>Usar para entrega posterior, vendas para CNPJ e pedidos com O.C.</p></article>
+              <article class="note-card note-card--sand"><h3>Regra principal</h3><p>Vendeu, faturou. Toda venda do dia deve gerar documento fiscal.</p></article>
+            </div>
+
+            <p class="slide-close">Documento fiscal no dia sustenta operação limpa para logística, cobrança e conciliação.</p>
+          </div>
+        </section>
+
+        <!-- Slide 11 -->
+        <section class="slide" data-title="Regra da O.C.">
+          <div class="slide-frame">
+            <p class="slide-kicker">Tratamento da Ordem de Compra</p>
+            <h2>Regra da O.C. no fluxo oficial</h2>
+            <p class="slide-context">
+              A O.C. não é uma etapa operacional separada. Ela é uma sinalização obrigatória que precisa acompanhar o processo de
+              ponta a ponta quando existir.
+            </p>
+
+            <div class="grid-2">
+              <article class="note-card note-card--olive-soft">
+                <h3>Quando houver O.C.</h3>
+                <ul>
+                  <li>Número da O.C. obrigatório no PV</li>
+                  <li>Informação segue para Caixa e Faturamento</li>
+                  <li>Número da O.C. deve constar na NF</li>
+                  <li>Faturamento deve tratar claramente essa informação na emissão</li>
+                </ul>
+              </article>
+              <article class="note-card note-card--sand">
+                <h3>Ponto de atenção executivo</h3>
+                <p>
+                  Sem O.C. corretamente registrada no início, aumenta risco de atraso de faturamento, devolução documental e
+                  inconsistência de cobrança no fim do ciclo.
+                </p>
+              </article>
+            </div>
+
+            <p class="slide-close">O.C. precisa ser tratada como informação essencial de emissão, não como tratativa paralela.</p>
+          </div>
+        </section>
+
+        <!-- Slide 12 -->
+        <section class="slide" data-title="Macro PV Flow to Reconciliation">
+          <div class="slide-frame">
+            <p class="slide-kicker">Visão macro operacional</p>
+            <h2>Macrofluxo do PV até a conciliação</h2>
+            <p class="slide-context">
+              O PV pode seguir ritmos operacionais diferentes conforme a condição da venda, mas toda operação precisa nascer bem
+              registrada, gerar título financeiro, emitir documento fiscal no dia da venda e terminar em conciliação.
+            </p>
+
+            <div class="pv-map">
+              <div class="pv-main">
+                <div class="pv-track">
+                  <article class="pv-node">
+                    <h3>Comercial / Criação do PV</h3>
+                    <p>
+                      Cria o PV no ERP em orçamento, com cliente, itens, preço, desconto, condição de pagamento, origem e O.C.
+                      quando aplicável.
+                    </p>
+                  </article>
+                  <article class="pv-node pv-node--approval">
+                    <h3>Aprovação / Validade do orçamento</h3>
+                    <p>
+                      O orçamento pode ficar aberto por até 7 dias. Se aprovado, avança. Se não aprovado, o motivo é registrado e
+                      o PV é arquivado.
+                    </p>
+                  </article>
+                  <article class="pv-node pv-node--focus">
+                    <h3>Caixa / Confirmação do pedido</h3>
+                    <p>
+                      Confirma o PV aprovado, identifica a natureza do pedido, define a forma de recebimento correta e cria o
+                      título financeiro no ERP.
+                    </p>
+                    <p class="pv-emphasis">Etapa de caixa = criação do título financeiro</p>
+                    <p class="pv-subnote">O caixa não renegocia. O caixa operacionaliza o que já foi aprovado.</p>
+                  </article>
+                  <article class="pv-node pv-node--focus">
+                    <h3>Documento fiscal</h3>
+                    <p>Toda venda do dia deve gerar documento fiscal.</p>
+                    <p class="pv-emphasis">Vendeu = faturou no mesmo dia</p>
+                    <p class="pv-subnote">NFC-e para balcão imediato. NF-e para entrega posterior, CNPJ e pedidos com O.C.</p>
+                  </article>
+                  <article class="pv-node pv-node--wide">
+                    <h3>Processamento operacional</h3>
+                    <p>
+                      Após a confirmação fiscal, o pedido segue o caminho operacional conforme sua natureza: faturamento, produção
+                      quando aplicável, separação/estoque, logística e retirada ou entrega.
+                    </p>
+                    <p class="pv-subnote">Produção entra apenas quando aplicável.</p>
+                  </article>
+                  <article class="pv-node">
+                    <h3>Recebimento financeiro</h3>
+                    <p>
+                      O valor entra conforme condição aprovada: recebimento imediato, boleto, mensalista legado, crediário legado
+                      ou pagamento posterior.
+                    </p>
+                  </article>
+                  <article class="pv-node pv-node--final">
+                    <h3>Conciliação</h3>
+                    <p>O recebimento é conferido, confrontado e confirmado. O processo se encerra aqui.</p>
+                    <p class="pv-emphasis pv-emphasis--final">O encerramento real do processo acontece na conciliação</p>
+                  </article>
+                </div>
+
+                <div class="pv-oc-note">
+                  <strong>Se houver O.C.:</strong>
+                  <span>Número obrigatório no PV, informação seguindo para caixa e faturamento, e registro obrigatório na NF-e.</span>
+                </div>
+              </div>
+
+              <aside class="macro-aside">
+                <h3>Exemplo: cliente mensalista legado</h3>
+                <p>
+                  O PV passa no caixa, gera título financeiro e permanece em carteira até o fechamento obrigatório do dia 03.
+                  Depois, o boleto é emitido, o pagamento pode ocorrer dias depois e o encerramento continua acontecendo na
+                  conciliação.
+                </p>
+              </aside>
+            </div>
+
+            <p class="slide-close">
+              O caminho pode variar no tempo de recebimento e na natureza do pedido, mas a regra é única: PV aprovado, confirmação
+              no caixa, criação do título financeiro, documento fiscal no dia da venda, execução operacional e conciliação final.
+            </p>
+          </div>
+        </section>
+
+        <!-- Slide 13 -->
+        <section class="slide" data-title="Faturamento e documentos liberatórios">
+          <div class="slide-frame">
+            <p class="slide-kicker">Execução de emissão</p>
+            <h2>Faturamento e documentos liberatórios</h2>
+            <p class="slide-context">
+              Pedidos que não são concluídos integralmente no caixa seguem para faturamento, que precisa enxergar o contexto
+              completo para emitir e liberar corretamente.
+            </p>
+
+            <div class="grid-2">
+              <article class="note-card note-card--olive-soft">
+                <h3>O que o Faturamento precisa enxergar</h3>
+                <ul>
+                  <li>Forma de pagamento</li>
+                  <li>Tipo financeiro</li>
+                  <li>Se tem O.C. e número da O.C.</li>
+                  <li>Documento fiscal esperado</li>
+                  <li>Próximo passo esperado</li>
+                </ul>
+              </article>
+              <article class="note-card note-card--sand">
+                <h3>Responsabilidades do setor</h3>
+                <ul>
+                  <li>Emitir NF-e</li>
+                  <li>Emitir boleto quando aplicável</li>
+                  <li>Registrar título quando aplicável</li>
+                  <li>Registrar número da NF</li>
+                  <li>Registrar número do boleto/título</li>
+                  <li>Liberar documentação para logística</li>
+                </ul>
+              </article>
+            </div>
+
+            <p class="slide-close">Faturamento claro e completo reduz atraso de entrega e inconsistências de cobrança.</p>
+          </div>
+        </section>
+
+        <!-- Slide 14 -->
+        <section class="slide" data-title="Retirada e separação">
+          <div class="slide-frame">
+            <p class="slide-kicker">Execução física do pedido</p>
+            <h2>Retirada e separação</h2>
+            <p class="slide-context">
+              A retirada muda conforme porte do material e natureza da entrega, mas sempre com conferência e registro de
+              liberação.
+            </p>
+
+            <div class="results-grid">
+              <article class="result-card">
+                <h3>Retirada imediata de miudezas</h3>
+                <p>Vendedor libera, cliente confere e assina, PV impresso é arquivado e caixa conclui com NFC-e.</p>
+              </article>
+              <article class="result-card">
+                <h3>Retirada de material grande</h3>
+                <p>Galpão ao lado, equipe logística libera com PV + NFC-e, separador carimba/assina e cliente assina retirada.</p>
+              </article>
+              <article class="result-card">
+                <h3>Retirada parcial / total</h3>
+                <p>Sistema deve aceitar baixa parcial ou total por item e por quantidade do item.</p>
+              </article>
+              <article class="result-card">
+                <h3>Conferência física</h3>
+                <p>Separação/estoque apoia validação antes da saída, garantindo rastreabilidade da liberação.</p>
+              </article>
+            </div>
+
+            <p class="slide-close">Separação com registro correto reduz divergência entre pedido, entrega e cobrança.</p>
+          </div>
+        </section>
+
+        <!-- Slide 15 -->
+        <section class="slide" data-title="Logística e corte operacional">
+          <div class="slide-frame">
+            <p class="slide-kicker">Planejamento e capacidade de entrega</p>
+            <h2>Logística e corte operacional</h2>
+            <p class="slide-context">
+              A logística planeja cargas e rotas a partir de 15h30, com regra de corte por horário e validação de capacidade real
+              do caminhão.
+            </p>
+
+            <div class="results-grid">
+              <article class="result-card"><h3>Até 15h30</h3><p>Entrega amanhã elegível, conforme disponibilidade real de carga.</p></article>
+              <article class="result-card"><h3>15h30 a 17h30</h3><p>Entrega amanhã sob análise, como possibilidade de encaixe.</p></article>
+              <article class="result-card"><h3>Após 17h30</h3><p>Pedido entra automaticamente na próxima rota disponível.</p></article>
+              <article class="result-card"><h3>Capacidade do caminhão</h3><p>Mesmo dentro do prazo, venda grande pode não caber na carga planejada.</p></article>
+              <article class="result-card"><h3>Rotas fixas</h3><p>Exemplo: Mariana diária, Ouro Preto terça-feira, Santa Bárbara quinta-feira.</p></article>
+              <article class="result-card"><h3>Liberação de saída</h3><p>Caminhão só sai com carga conferida, pedido conferido e documentação liberada pelo faturamento.</p></article>
+            </div>
+
+            <p class="slide-close">Corte logístico e capacidade devem ser tratados como regra operacional, não promessa comercial.</p>
+          </div>
+        </section>
+
+        <!-- Slide 16 -->
+        <section class="slide" data-title="Próximos passos">
+          <div class="slide-frame">
+            <p class="slide-kicker">Consolidação da implantação</p>
+            <h2>Próximos passos</h2>
+            <p class="slide-context">
+              O foco da implantação é transformar o fluxo oficial em rotina executável entre setores, com disciplina de origem e
+              previsibilidade de resultado.
+            </p>
+
+            <div class="grid-2">
+              <article class="note-card note-card--olive-soft"><h3>Treinamento</h3><p>Alinhar linguagem e execução entre Comercial, Caixa, Faturamento, Logística e Financeiro.</p></article>
+              <article class="note-card note-card--olive-soft"><h3>Padronização</h3><p>Fixar regras de negociação, fiscal, O.C., emissão e documentação sem atalhos paralelos.</p></article>
+              <article class="note-card note-card--olive-soft"><h3>Disciplina de lançamento</h3><p>Garantir PV completo na origem para reduzir retrabalho em cadeia.</p></article>
+              <article class="note-card note-card--olive-soft"><h3>Integração entre setores</h3><p>Consolidar passagem de bastão com clareza de responsabilidade por etapa.</p></article>
+              <article class="note-card note-card--olive-soft"><h3>Previsibilidade</h3><p>Melhorar visibilidade de recebimento, fechamento e conciliação.</p></article>
+              <article class="note-card note-card--olive-soft"><h3>Transição das carteiras antigas</h3><p>Mensalista e crediário mantidos temporariamente, com migração progressiva para modalidades mais seguras.</p></article>
+            </div>
+
+            <p class="slide-close">Próximo passo é transformar regra aprovada em rotina operacional consistente.</p>
+          </div>
+        </section>
+
+        <!-- Slide 17 -->
+        <section class="slide" data-title="Resultados esperados após implantação">
+          <div class="slide-frame">
+            <p class="slide-kicker">Síntese executiva dos ganhos</p>
+            <h2>Resultados Esperados Após Implantação do Novo Processo</h2>
+            <p class="slide-context">
+              Com a implantação do novo fluxo, a Minasfer passa a operar com mais clareza, disciplina, rastreabilidade e
+              previsibilidade em todas as etapas da venda.
+            </p>
+
+            <div class="results-grid">
+              <article class="result-card">
+                <h3>Mais clareza comercial</h3>
+                <p>
+                  A negociação deixa de depender de decisões descentralizadas sem critério único e passa a seguir critérios
+                  objetivos, com tratamento mais consistente para descontos, exceções e condições especiais.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Maior proteção de margem</h3>
+                <p>
+                  Condições comerciais passam a ser concedidas com mais disciplina, reduzindo concessões sem critério e
+                  melhorando o controle sobre a rentabilidade das vendas.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Menos retrabalho entre setores</h3>
+                <p>
+                  Com o fluxo definido, vendedor, caixa, faturamento, logística e financeiro passam a trabalhar com maior
+                  alinhamento e menos ajustes de origem.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Melhor qualidade de lançamento e faturamento</h3>
+                <p>
+                  O pedido nasce mais corretamente no processo, com condição registrada, documento fiscal emitido no dia da venda
+                  e tratamento mais seguro para casos com O.C.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Mais previsibilidade financeira</h3>
+                <p>
+                  Toda entrada no caixa gera título financeiro, o recebimento passa a ser melhor acompanhado e a empresa ganha
+                  mais visibilidade sobre o contas a receber.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Conciliação como encerramento real do processo</h3>
+                <p>
+                  A venda deixa de ser tratada como concluída apenas no fechamento comercial e passa a ser efetivamente encerrada
+                  somente após conferência, recebimento e conciliação.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Melhor controle das carteiras especiais</h3>
+                <p>
+                  Mensalista e crediário passam a operar com fechamento obrigatório no dia 03, maior disciplina de acompanhamento
+                  e estratégia de transição para modalidades mais seguras.
+                </p>
+              </article>
+              <article class="result-card">
+                <h3>Mais capacidade de crescimento com organização</h3>
+                <p>
+                  Com papéis claros, regras definidas e maior rastreabilidade, a operação ganha base para treinamento,
+                  acompanhamento, melhoria contínua e escalabilidade.
+                </p>
+              </article>
+            </div>
+
+            <p class="slide-close">
+              O novo processo não apenas organiza a venda. Ele reduz ruído, protege resultado, melhora o controle e fortalece a
+              operação como um todo.
+            </p>
+          </div>
+        </section>
+      </main>
+
+      <footer class="controls" aria-label="Controles de navegação">
+        <button id="prevBtn" class="nav-btn" type="button">Anterior</button>
+        <div class="progress-wrap" aria-hidden="true">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+        <button id="nextBtn" class="nav-btn" type="button">Próximo</button>
+      </footer>
+    </div>
+    <script>
+/*
+  Navegação e ativos de marca da apresentação.
+  - Troque os arquivos na pasta /assets/img para atualizar as logos.
+  - Este script mantém a navegação por teclado e botões.
+*/
+const BRAND_ASSETS = {
+  primary: "./assets/img/logo-horizontes-horizontal.svg",
+  secondary: "./assets/img/logo-horizontes-stacked.png",
+  icon: "./assets/img/logo-horizontes-icon.png",
+};
+
+const slides = Array.from(document.querySelectorAll(".slide"));
+const totalSlides = slides.length;
+
+const slideCounter = document.getElementById("slideCounter");
+const progressBar = document.getElementById("progressBar");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+
+let currentIndex = 0;
+
+function applyLogoToNodes(type, src) {
+  const nodes = document.querySelectorAll(`[data-logo="${type}"]`);
+
+  nodes.forEach((imageEl) => {
+    imageEl.src = src;
+
+    imageEl.addEventListener("error", () => {
+      imageEl.closest(".logo-slot")?.classList.add("logo-missing");
+      imageEl.style.display = "none";
+    });
+
+    imageEl.addEventListener("load", () => {
+      imageEl.closest(".logo-slot")?.classList.remove("logo-missing");
+      imageEl.style.display = "block";
+    });
+  });
+}
+
+function updateSlideState() {
+  slides.forEach((slide, index) => {
+    slide.classList.remove("active", "prev");
+
+    if (index === currentIndex) {
+      slide.classList.add("active");
+      return;
+    }
+
+    if (index < currentIndex) {
+      slide.classList.add("prev");
+    }
+  });
+
+  const visibleNumber = currentIndex + 1;
+  slideCounter.textContent = `${visibleNumber} / ${totalSlides}`;
+  progressBar.style.width = `${(visibleNumber / totalSlides) * 100}%`;
+
+  prevBtn.disabled = currentIndex === 0;
+  nextBtn.disabled = currentIndex === totalSlides - 1;
+
+  const title = slides[currentIndex]?.dataset?.title;
+  if (title) {
+    document.title = `${title} | Novo Fluxo de Vendas Minasfer`;
+  }
+}
+
+function goToSlide(nextIndex) {
+  if (nextIndex < 0 || nextIndex > totalSlides - 1 || nextIndex === currentIndex) {
+    return;
+  }
+
+  currentIndex = nextIndex;
+  updateSlideState();
+}
+
+function handleKeyboardNavigation(event) {
+  const tag = event.target?.tagName;
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") {
+    return;
+  }
+
+  if (event.key === "ArrowRight") {
+    event.preventDefault();
+    goToSlide(currentIndex + 1);
+    return;
+  }
+
+  if (event.key === "ArrowLeft") {
+    event.preventDefault();
+    goToSlide(currentIndex - 1);
+  }
+}
+
+prevBtn.addEventListener("click", () => goToSlide(currentIndex - 1));
+nextBtn.addEventListener("click", () => goToSlide(currentIndex + 1));
+document.addEventListener("keydown", handleKeyboardNavigation);
+
+applyLogoToNodes("primary", BRAND_ASSETS.primary);
+applyLogoToNodes("secondary", BRAND_ASSETS.secondary);
+applyLogoToNodes("icon", BRAND_ASSETS.icon);
+updateSlideState();
+    </script>
+  </body>
+</html>
